@@ -1,0 +1,151 @@
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Phone, Mail, MapPin, Clock, CheckCircle2 } from "lucide-react";
+import SectionHeading from "../components/SectionHeading";
+
+const initialForm = { name: "", email: "", phone: "", subject: "", message: "" };
+
+export default function Contact() {
+  const [form, setForm] = useState(initialForm);
+  const [errors, setErrors] = useState({});
+  const [submitted, setSubmitted] = useState(false);
+
+  const update = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
+
+  const validate = () => {
+    const errs = {};
+    if (!form.name.trim()) errs.name = "Name is required.";
+    if (!form.email.trim()) errs.email = "Email is required.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errs.email = "Enter a valid email.";
+    if (!form.phone.trim()) errs.phone = "Phone number is required.";
+    if (!form.subject.trim()) errs.subject = "Subject is required.";
+    if (!form.message.trim()) errs.message = "Message is required.";
+    return errs;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const errs = validate();
+    setErrors(errs);
+    if (Object.keys(errs).length === 0) {
+      setSubmitted(true);
+      setForm(initialForm);
+    }
+  };
+
+  const inputClass = (key) =>
+    `w-full bg-white border rounded-xl px-4 py-3 text-sm text-ink outline-none transition-colors focus:border-gold ${
+      errors[key] ? "border-red-400" : "border-sand"
+    }`;
+
+  return (
+    <div className="pt-32 pb-24">
+      <div className="container-inn">
+        <SectionHeading eyebrow="Get in Touch" title="Find GRS Inn" />
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-20">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <InfoCard icon={MapPin} title="Address" lines={["Chengam Road,", "Tiruvannamalai, Tamil Nadu 606601"]} />
+            <InfoCard icon={Phone} title="Phone" lines={["+91 98765 43210"]} />
+            <InfoCard icon={Mail} title="Email" lines={["stay@grsinn.com"]} />
+            <InfoCard icon={Clock} title="Check-in / Check-out" lines={["From 1:00 PM", "Until 11:00 AM"]} />
+          </div>
+          <div className="rounded-3xl overflow-hidden border border-sand aspect-[4/3] lg:aspect-auto">
+            <iframe
+              title="GRS Inn location map"
+              className="w-full h-full min-h-[280px]"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=Tiruvannamalai,Tamil%20Nadu&output=embed"
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-wrap gap-4 mb-20">
+          <a href="tel:+919876543210" className="bg-ink hover:bg-pine text-ivory px-6 py-3 rounded-full text-sm flex items-center gap-2 transition-colors">
+            <Phone size={15} /> Call Us
+          </a>
+          <a href="mailto:stay@grsinn.com" className="border border-ink/20 text-ink px-6 py-3 rounded-full text-sm flex items-center gap-2 hover:border-gold hover:text-gold transition-colors">
+            <Mail size={15} /> Email Us
+          </a>
+          <a
+            href="https://www.google.com/maps?q=Tiruvannamalai,Tamil+Nadu"
+            target="_blank"
+            rel="noreferrer"
+            className="border border-ink/20 text-ink px-6 py-3 rounded-full text-sm flex items-center gap-2 hover:border-gold hover:text-gold transition-colors"
+          >
+            <MapPin size={15} /> Get Directions
+          </a>
+        </div>
+
+        <div className="max-w-2xl mx-auto bg-ivory-dim/60 rounded-3xl p-8 sm:p-12">
+          {!submitted ? (
+            <>
+              <h2 className="font-display text-2xl text-ink mb-1">Send Us a Message</h2>
+              <p className="text-ink-soft text-sm mb-8">We usually reply within one business day.</p>
+              <form onSubmit={handleSubmit} noValidate className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label className="block text-xs text-ink-soft mb-1.5">Name</label>
+                  <input value={form.name} onChange={update("name")} className={inputClass("name")} placeholder="Your name" />
+                  {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+                </div>
+                <div>
+                  <label className="block text-xs text-ink-soft mb-1.5">Email</label>
+                  <input type="email" value={form.email} onChange={update("email")} className={inputClass("email")} placeholder="you@example.com" />
+                  {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+                </div>
+                <div>
+                  <label className="block text-xs text-ink-soft mb-1.5">Phone</label>
+                  <input type="tel" value={form.phone} onChange={update("phone")} className={inputClass("phone")} placeholder="+91 98765 43210" />
+                  {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+                </div>
+                <div>
+                  <label className="block text-xs text-ink-soft mb-1.5">Subject</label>
+                  <input value={form.subject} onChange={update("subject")} className={inputClass("subject")} placeholder="How can we help?" />
+                  {errors.subject && <p className="text-red-500 text-xs mt-1">{errors.subject}</p>}
+                </div>
+                <div className="sm:col-span-2">
+                  <label className="block text-xs text-ink-soft mb-1.5">Message</label>
+                  <textarea rows={4} value={form.message} onChange={update("message")} className={inputClass("message")} placeholder="Tell us a bit more" />
+                  {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
+                </div>
+                <div className="sm:col-span-2">
+                  <button type="submit" className="w-full bg-gold hover:bg-gold-light text-ivory text-sm tracking-wide px-6 py-3.5 rounded-full transition-colors cursor-pointer">
+                    Send Message
+                  </button>
+                </div>
+              </form>
+            </>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="text-center py-6"
+            >
+              <div className="w-14 h-14 rounded-full bg-gold/15 grid place-items-center mx-auto mb-5">
+                <CheckCircle2 size={26} className="text-gold" />
+              </div>
+              <h3 className="font-display text-2xl text-ink mb-2">Message Sent</h3>
+              <p className="text-ink-soft text-sm max-w-sm mx-auto">
+                Thank you for reaching out. Our team at GRS INN will get back to you shortly.
+              </p>
+            </motion.div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function InfoCard({ icon: Icon, title, lines }) {
+  return (
+    <div className="bg-white border border-sand rounded-2xl p-6">
+      <Icon size={20} className="text-gold mb-3" />
+      <p className="text-sm font-medium text-ink mb-1">{title}</p>
+      {lines.map((l) => (
+        <p key={l} className="text-sm text-ink-soft">{l}</p>
+      ))}
+    </div>
+  );
+}
