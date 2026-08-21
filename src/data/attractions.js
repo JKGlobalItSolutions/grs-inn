@@ -1,3 +1,5 @@
+import kovilImage from "../assets/nearby/kovil.png";
+
 const wiki = (filename) =>
   `https://commons.wikimedia.org/wiki/Special:FilePath/${filename}?width=900`;
 
@@ -9,7 +11,7 @@ export const attractions = [
   {
     name: "Arunachaleswarar Temple",
     distance: "1.5 km from hotel",
-    image: wiki("Thiruvannamalai_Arunachaleswarar_Temple_Rajagopuram.jpg"),
+    image: kovilImage,
     description:
       "One of South India's largest Shiva temples, its towering gopurams anchor the town and draw pilgrims from across the country through the year.",
   },

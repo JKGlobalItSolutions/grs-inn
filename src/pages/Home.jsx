@@ -14,6 +14,10 @@ import {
   HeartHandshake,
   ShieldCheck,
   Gem,
+  Droplets,
+  Truck,
+  Zap,
+  User,
 } from "lucide-react";
 import Hero from "../components/Hero";
 import BookingBar from "../components/BookingBar";
@@ -35,7 +39,10 @@ const amenities = [
   { icon: Coffee, label: "Room Service" },
   { icon: Sparkles, label: "Daily Housekeeping" },
   { icon: ParkingCircle, label: "Parking" },
-  { icon: UtensilsCrossed, label: "Restaurant / Dining" },
+  { icon: Droplets, label: "24×7 Hot Water" },
+  { icon: Truck, label: "Lift" },
+  { icon: Zap, label: "DG Generator Set" },
+  { icon: User, label: "Driver Stay Facility" },
 ];
 
 const experiences = [
@@ -106,11 +113,9 @@ export default function Home() {
             subtitle=""
           />
           <p className="text-ink-soft leading-relaxed -mt-8 mb-8">
-            GRS INN was built around a simple idea: a stay should feel effortless. Every
-            room is kept clean and thoughtfully arranged, every facility is chosen for
-            everyday convenience, and every member of our team is here to make your visit
-            easier — whether you're passing through for a night of business or settling in
-            for a longer family trip.
+GRS Inn
+A Stay Designed Around You
+GRS INN was built around a simple idea: a stay should feel effortless. Every room is kept clean and thoughtfully arranged, every facility is chosen for everyday convenience, and every member of our team is here to make your visit easier — whether you're passing through for a night of business or settling in for a longer family trip.With a focus on comfort, cleanliness, convenience, and warm hospitality, GRS Inn aims to make every guest’s stay pleasant and memorable. Whether you are visiting for pilgrimage, Girivalam, sightseeing, or business, GRS Inn is committed to providing a reliable and comfortable stay in Tiruvannamalai.
           </p>
           <ul className="grid grid-cols-2 gap-4 mb-10">
             {["Comfortable accommodation", "Thoughtfully designed rooms", "Modern facilities", "Friendly hospitality", "Convenient location", "Business & leisure ready"].map(
@@ -122,12 +127,12 @@ export default function Home() {
               )
             )}
           </ul>
-          <Link
+          {/* <Link
             to="/about"
             className="inline-block border border-ink/20 text-ink px-7 py-3 rounded-full text-sm hover:border-gold hover:text-gold transition-colors"
           >
             Discover GRS Inn
-          </Link>
+          </Link> */}
         </div>
       </section>
 
@@ -189,38 +194,6 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* DINING */}
-      <section className="container-inn py-24 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-        <div className="order-2 lg:order-1">
-          <SectionHeading align="left" eyebrow="Dining" title="Dine & Unwind" />
-          <p className="text-ink-soft leading-relaxed -mt-8 mb-8">
-            Enjoy delicious meals and refreshing moments in a welcoming dining environment
-            at GRS INN — from an unhurried breakfast to a relaxed dinner at the end of the
-            day.
-          </p>
-          <div className="grid grid-cols-2 gap-4 mb-10 max-w-sm">
-            {["Breakfast", "Lunch", "Dinner", "Beverages"].map((m) => (
-              <div key={m} className="flex items-center gap-2 text-sm text-ink-soft border border-sand rounded-full px-4 py-2.5">
-                <UtensilsCrossed size={14} className="text-gold" /> {m}
-              </div>
-            ))}
-          </div>
-          <Link
-            to="/amenities"
-            className="inline-block bg-ink hover:bg-pine text-ivory px-7 py-3 rounded-full text-sm transition-colors"
-          >
-            Explore Dining
-          </Link>
-        </div>
-        <div className="order-1 lg:order-2 rounded-3xl overflow-hidden aspect-[4/3]">
-          <img
-            src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=1200&auto=format&fit=crop"
-            alt="GRS Inn restaurant dining space"
-            className="w-full h-full object-cover"
-          />
         </div>
       </section>
 

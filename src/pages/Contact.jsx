@@ -45,10 +45,10 @@ export default function Contact() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-20">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <InfoCard icon={MapPin} title="Address" lines={["Chengam Road,", "Tiruvannamalai, Tamil Nadu 606601"]} />
-            <InfoCard icon={Phone} title="Phone" lines={["+91 98765 43210"]} />
-            <InfoCard icon={Mail} title="Email" lines={["stay@grsinn.com"]} />
-            <InfoCard icon={Clock} title="Check-in / Check-out" lines={["From 1:00 PM", "Until 11:00 AM"]} />
+            <InfoCard icon={MapPin} title="Address" lines={[" No,2. Ramalinganar 2nd Street, Tiruvannamalai, Tamil Nadu 606601"]} />
+            <InfoCard icon={Phone} title="Phone" lines={["9384132555"]} />
+            <InfoCard icon={Mail} title="Email" lines={["grsinntvm@gmail.com"]} />
+            <InfoCard icon={Clock} title="Check-in / Check-out" lines={["24 Hours Check Out"]} />
           </div>
           <div className="rounded-3xl overflow-hidden border border-sand aspect-[4/3] lg:aspect-auto">
             <iframe
@@ -56,7 +56,7 @@ export default function Contact() {
               className="w-full h-full min-h-[280px]"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              src="https://www.google.com/maps?q=Tiruvannamalai,Tamil%20Nadu&output=embed"
+              src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d1074.9791350506669!2d79.07516952817159!3d12.227718342183614!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1787230393250!5m2!1sen!2sin"
             />
           </div>
         </div>

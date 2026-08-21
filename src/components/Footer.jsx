@@ -27,7 +27,7 @@ export default function Footer() {
         <div>
           <div className="flex items-center gap-2 mb-4">
             <img src={logo} alt="GRS Inn logo" className="w-11 h-11 rounded-full object-cover" />
-            <span className="font-display text-xl text-ivory tracking-wide">GRS INN</span>
+            <span className="font-display text-xl text-ivory tracking-wide">GRS Inn</span>
           </div>
           <p className="italic text-ivory/60 text-sm mb-6">
             Comfort. Elegance. A Stay to Remember.
@@ -60,25 +60,25 @@ export default function Footer() {
         <div>
           <h4 className="eyebrow text-gold-light mb-5">Rooms</h4>
           <ul className="space-y-3 text-sm">
-            <li><Link to="/rooms/standard-room" className="hover:text-gold-light transition-colors">Standard Room</Link></li>
-            <li><Link to="/rooms/deluxe-room" className="hover:text-gold-light transition-colors">Deluxe Room</Link></li>
-            <li><Link to="/rooms/suite-room" className="hover:text-gold-light transition-colors">Suite Room</Link></li>
+            <li><Link to="/rooms/standard-room" className="hover:text-gold-light transition-colors">Premium Room</Link></li>
+            <li><Link to="/rooms/deluxe-room" className="hover:text-gold-light transition-colors">Suite Room</Link></li>
+            <li><Link to="/rooms/suite-room" className="hover:text-gold-light transition-colors">Standard Room</Link></li>
           </ul>
         </div>
 
         <div>
           <h4 className="eyebrow text-gold-light mb-5">Contact</h4>
           <ul className="space-y-3 text-sm">
-            <li className="flex items-start gap-2"><Phone size={15} className="mt-0.5 shrink-0" /> +91 98765 43210</li>
-            <li className="flex items-start gap-2"><Mail size={15} className="mt-0.5 shrink-0" /> stay@grsinn.com</li>
-            <li className="flex items-start gap-2"><MapPin size={15} className="mt-0.5 shrink-0" /> Chengam Road, Tiruvannamalai, Tamil Nadu 606601</li>
+            <li className="flex items-start gap-2"><Phone size={15} className="mt-0.5 shrink-0" /> 9384132555 , 9384172555</li>
+            <li className="flex items-start gap-2"><Mail size={15} className="mt-0.5 shrink-0" /> grsinntvm@gmail.com</li>
+            <li className="flex items-start gap-2"><MapPin size={15} className="mt-0.5 shrink-0" /> No,2. Ramalinganar 2nd Street, Tiruvannamalai, Tamil Nadu 606601</li>
           </ul>
         </div>
       </div>
 
       <div className="container-inn pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-ivory/45">
-        <p>© 2026 GRS INN. All rights reserved.</p>
-        <p>Designed for a stay to remember.</p>
+        <p>© 2026 GRS Inn. All rights reserved.</p>
+        <p>Designed by Sonachala</p>
       </div>
     </footer>
   );

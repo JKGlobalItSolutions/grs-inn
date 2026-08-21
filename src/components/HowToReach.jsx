@@ -50,7 +50,7 @@ export default function HowToReach() {
           light
           eyebrow="How to Reach GRS Inn"
           title="How to Reach Us"
-          subtitle="Plan your journey to GRS INN, Tiruvannamalai from your city with one click."
+          subtitle="Plan your journey to GRS Inn, Tiruvannamalai from your city with one click."
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">

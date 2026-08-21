@@ -48,7 +48,7 @@ export default function Navbar() {
               scrolled ? "text-ink" : "text-ivory"
             }`}
           >
-            GRS INN
+            GRS Inn
           </span>
         </Link>
 
