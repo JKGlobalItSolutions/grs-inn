@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Hourglass, Moon, Sparkles } from "lucide-react";
 import { pilgrimageDates, getNextPournami, stayBenefits } from "../data/pilgrimage";
@@ -27,8 +27,20 @@ function useCountdown(targetDate) {
 
 export default function PilgrimageCalendar() {
   const { openBooking } = useBooking();
-  const next = getNextPournami();
-  const countdown = useCountdown(next.dateObj || new Date(`${next.date}T18:00:00`));
+
+  // Compute `next` exactly once (lazy initializer) instead of calling
+  // getNextPournami() on every render. If that function returns a fresh
+  // object/Date each time it's called, calling it on every render made
+  // `next` (and therefore the countdown's target date) change reference
+  // every render — which retriggered the countdown's useEffect every
+  // render, which called setState every render, causing an infinite loop.
+  const [next] = useState(() => getNextPournami());
+
+  const targetDate = useMemo(
+    () => next.dateObj || new Date(`${next.date}T18:00:00`),
+    [next]
+  );
+  const countdown = useCountdown(targetDate);
 
   return (
     <section className="bg-ivory-dim/60 py-24">
