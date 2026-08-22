@@ -1,9 +1,25 @@
-import { motion } from "framer-motion";
+import { useState, useEffect, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useBooking } from "../context/BookingContext";
 
 export default function RoomCard({ room, index = 0 }) {
   const { openBooking } = useBooking();
+
+  const images = useMemo(
+    () => (room.gallery && room.gallery.length > 0 ? room.gallery.slice(0, 2) : [room.heroImage]),
+    [room.gallery, room.heroImage]
+  );
+
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    if (images.length < 2) return;
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % images.length);
+    }, 3200);
+    return () => clearInterval(timer);
+  }, [images.length]);
 
   return (
     <motion.article
@@ -14,15 +30,36 @@ export default function RoomCard({ room, index = 0 }) {
       className="group bg-white rounded-3xl overflow-hidden border border-sand/70 shadow-[0_10px_35px_-20px_rgba(33,28,23,0.3)] hover:shadow-soft transition-shadow duration-500"
     >
       <div className="relative h-64 overflow-hidden">
-        <img
-          src={room.heroImage}
-          alt={room.name}
-          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-        />
-        <div className="absolute top-4 left-4 bg-ivory/90 backdrop-blur px-3 py-1.5 rounded-full text-[11px] tracking-wide text-ink-soft">
+        <AnimatePresence mode="sync">
+          <motion.img
+            key={current}
+            src={images[current]}
+            alt={room.name}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.9, ease: "easeInOut" }}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+        </AnimatePresence>
+
+        {images.length > 1 && (
+          <div className="absolute bottom-4 left-4 flex gap-1.5 z-10">
+            {images.map((_, i) => (
+              <span
+                key={i}
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  i === current ? "w-5 bg-ivory" : "w-1.5 bg-ivory/50"
+                }`}
+              />
+            ))}
+          </div>
+        )}
+
+        <div className="absolute top-4 left-4 bg-ivory/90 backdrop-blur px-3 py-1.5 rounded-full text-[11px] tracking-wide text-ink-soft z-10">
           {room.size}
         </div>
-        <div className="absolute bottom-4 right-4 bg-ink/85 text-ivory px-3 py-1.5 rounded-full text-sm">
+        <div className="absolute bottom-4 right-4 bg-ink/85 text-ivory px-3 py-1.5 rounded-full text-sm z-10">
           {room.price} <span className="text-ivory/60 text-xs">/ night</span>
         </div>
       </div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, CheckCircle2 } from "lucide-react";
 import { useBooking } from "../context/BookingContext";
+import { rooms } from "../data/rooms";
 
 const initialForm = {
   fullName: "",
@@ -9,7 +10,7 @@ const initialForm = {
   phone: "",
   checkIn: "",
   checkOut: "",
-  roomType: "Standard Room",
+  roomType: rooms[0].slug,
   guests: 1,
   rooms: 1,
   requests: "",
@@ -21,12 +22,25 @@ export default function BookingModal() {
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
 
+  const selectedRoom =
+    rooms.find((r) => r.slug === form.roomType) || rooms[0];
+  const maxGuests = selectedRoom.maxGuests;
+  const maxRooms = selectedRoom.roomCount;
+
   useEffect(() => {
     if (isOpen) {
-      setForm((f) => ({ ...f, roomType: presetRoom || f.roomType }));
+      const nextRoomType = presetRoom || form.roomType;
+      const nextRoom = rooms.find((r) => r.slug === nextRoomType) || rooms[0];
+      setForm((f) => ({
+        ...f,
+        roomType: nextRoom.slug,
+        guests: Math.min(f.guests, nextRoom.maxGuests),
+        rooms: Math.min(f.rooms, nextRoom.roomCount),
+      }));
       setSubmitted(false);
       setErrors({});
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, presetRoom]);
 
   useEffect(() => {
@@ -34,6 +48,16 @@ export default function BookingModal() {
   }, [isOpen]);
 
   const update = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
+
+  const handleRoomTypeChange = (e) => {
+    const nextRoom = rooms.find((r) => r.slug === e.target.value) || rooms[0];
+    setForm((f) => ({
+      ...f,
+      roomType: nextRoom.slug,
+      guests: Math.min(f.guests, nextRoom.maxGuests),
+      rooms: Math.min(f.rooms, nextRoom.roomCount),
+    }));
+  };
 
   const validate = () => {
     const errs = {};
@@ -49,7 +73,11 @@ export default function BookingModal() {
     if (form.checkIn && form.checkOut && new Date(form.checkOut) <= new Date(form.checkIn))
       errs.checkOut = "Check-out must be after check-in.";
     if (!form.guests || Number(form.guests) <= 0) errs.guests = "Guests must be greater than zero.";
+    else if (Number(form.guests) > maxGuests)
+      errs.guests = `${selectedRoom.name} allows up to ${maxGuests} guests.`;
     if (!form.rooms || Number(form.rooms) <= 0) errs.rooms = "Rooms must be greater than zero.";
+    else if (Number(form.rooms) > maxRooms)
+      errs.rooms = `Only ${maxRooms} ${selectedRoom.name}(s) available.`;
     return errs;
   };
 
@@ -171,34 +199,48 @@ export default function BookingModal() {
 
                   <div>
                     <label className="block text-xs text-ink-soft mb-1.5">Room Type</label>
-                    <select value={form.roomType} onChange={update("roomType")} className={inputClass("roomType")}>
-                      <option>Standard Room</option>
-                      <option>Deluxe Room</option>
-                      <option>Suite Room</option>
+                    <select
+                      value={form.roomType}
+                      onChange={handleRoomTypeChange}
+                      className={inputClass("roomType")}
+                    >
+                      {rooms.map((r) => (
+                        <option key={r.slug} value={r.slug}>
+                          {r.name}
+                        </option>
+                      ))}
                     </select>
                   </div>
 
                   <div>
                     <label className="block text-xs text-ink-soft mb-1.5">Number of Guests</label>
-                    <input
-                      type="number"
-                      min={1}
+                    <select
                       value={form.guests}
                       onChange={update("guests")}
                       className={inputClass("guests")}
-                    />
+                    >
+                      {Array.from({ length: maxGuests }, (_, i) => i + 1).map((n) => (
+                        <option key={n} value={n}>
+                          {n} {n === 1 ? "Guest" : "Guests"}
+                        </option>
+                      ))}
+                    </select>
                     {errors.guests && <p className="text-red-500 text-xs mt-1">{errors.guests}</p>}
                   </div>
 
                   <div>
                     <label className="block text-xs text-ink-soft mb-1.5">Number of Rooms</label>
-                    <input
-                      type="number"
-                      min={1}
+                    <select
                       value={form.rooms}
                       onChange={update("rooms")}
                       className={inputClass("rooms")}
-                    />
+                    >
+                      {Array.from({ length: maxRooms }, (_, i) => i + 1).map((n) => (
+                        <option key={n} value={n}>
+                          {n} {n === 1 ? "Room" : "Rooms"}
+                        </option>
+                      ))}
+                    </select>
                     {errors.rooms && <p className="text-red-500 text-xs mt-1">{errors.rooms}</p>}
                   </div>
 

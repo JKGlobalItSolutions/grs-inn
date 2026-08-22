@@ -15,7 +15,7 @@ import {
   ShieldCheck,
   Gem,
   Droplets,
-  Truck,
+  ArrowUpDown,
   Zap,
   User,
 } from "lucide-react";
@@ -30,6 +30,7 @@ import PilgrimageCalendar from "../components/PilgrimageCalendar";
 import HowToReach from "../components/HowToReach";
 import { rooms } from "../data/rooms";
 import { useBooking } from "../context/BookingContext";
+import buildingPhoto from "../assets/building-photo.jpeg";
 
 const amenities = [
   { icon: Wifi, label: "Free Wi-Fi" },
@@ -40,7 +41,7 @@ const amenities = [
   { icon: Sparkles, label: "Daily Housekeeping" },
   { icon: ParkingCircle, label: "Parking" },
   { icon: Droplets, label: "24×7 Hot Water" },
-  { icon: Truck, label: "Lift" },
+  { icon: ArrowUpDown, label: "Lift" },
   { icon: Zap, label: "DG Generator Set" },
   { icon: User, label: "Driver Stay Facility" },
 ];
@@ -94,14 +95,10 @@ export default function Home() {
         >
           <div className="rounded-t-full rounded-b-2xl overflow-hidden aspect-[3/4] max-w-md mx-auto">
             <img
-              src="https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=1000&auto=format&fit=crop"
-              alt="A quiet, well-lit room at GRS Inn"
+              src={buildingPhoto}
+              alt="GRS Inn building exterior in Tiruvannamalai"
               className="w-full h-full object-cover"
             />
-          </div>
-          <div className="hidden sm:block absolute -bottom-8 -right-4 bg-ivory border border-sand rounded-2xl px-6 py-5 shadow-soft">
-            <p className="font-display text-3xl text-gold">10+</p>
-            <p className="text-xs text-ink-soft w-28">Years of hosting comfortable stays</p>
           </div>
         </motion.div>
 
@@ -127,12 +124,6 @@ GRS INN was built around a simple idea: a stay should feel effortless. Every roo
               )
             )}
           </ul>
-          {/* <Link
-            to="/about"
-            className="inline-block border border-ink/20 text-ink px-7 py-3 rounded-full text-sm hover:border-gold hover:text-gold transition-colors"
-          >
-            Discover GRS Inn
-          </Link> */}
         </div>
       </section>
 

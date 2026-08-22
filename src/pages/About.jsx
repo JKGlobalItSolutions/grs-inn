@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { HeartHandshake, Sparkles, ShieldCheck, Gem } from "lucide-react";
+import { HeartHandshake, Sparkles, ShieldCheck, Gem, ArrowLeft } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 import buildingPhoto from "../assets/building-exterior.jpg";
 
@@ -14,6 +14,15 @@ export default function About() {
   return (
     <div className="pt-32">
       <section className="container-inn pb-20 text-center">
+        <div className="flex justify-center mb-6">
+          <a
+            href="/"
+            className="inline-flex items-center gap-2 text-sm text-ink-soft hover:text-gold transition-colors border border-sand rounded-full px-5 py-2"
+          >
+            <ArrowLeft size={16} />
+            Back to Home
+          </a>
+        </div>
         <span className="eyebrow text-gold">About GRS Inn</span>
         <h1 className="font-display text-4xl sm:text-5xl text-ink mt-3 max-w-2xl mx-auto">
           A Stay Designed Around You

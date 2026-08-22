@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { X, ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
 import { galleryImages, galleryCategories } from "../data/gallery";
 
 export default function Gallery({ limit }) {
@@ -19,6 +19,18 @@ export default function Gallery({ limit }) {
 
   return (
     <div>
+      {!limit && (
+        <div className="flex justify-center mb-6">
+          <a
+            href="/"
+            className="inline-flex items-center gap-2 text-sm text-ink-soft hover:text-gold transition-colors border border-sand rounded-full px-5 py-2"
+          >
+            <ArrowLeft size={16} />
+            Back to Home
+          </a>
+        </div>
+      )}
+
       {!limit && (
         <div className="flex flex-wrap justify-center gap-3 mb-10">
           {galleryCategories.map((cat) => (

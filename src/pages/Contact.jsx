@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Clock, CheckCircle2 } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, CheckCircle2, ArrowLeft } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 
 const initialForm = { name: "", email: "", phone: "", subject: "", message: "" };
@@ -41,6 +41,16 @@ export default function Contact() {
   return (
     <div className="pt-32 pb-24">
       <div className="container-inn">
+        <div className="flex justify-center mb-6">
+          <a
+            href="/"
+            className="inline-flex items-center gap-2 text-sm text-ink-soft hover:text-gold transition-colors border border-sand rounded-full px-5 py-2"
+          >
+            <ArrowLeft size={16} />
+            Back to Home
+          </a>
+        </div>
+
         <SectionHeading eyebrow="Get in Touch" title="Find GRS Inn" />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-20">
@@ -69,7 +79,7 @@ export default function Contact() {
             <Mail size={15} /> Email Us
           </a>
           <a
-            href="https://www.google.com/maps?q=Tiruvannamalai,Tamil+Nadu"
+            href="https://maps.app.goo.gl/vjRxZEb2qMxqHtRs8"
             target="_blank"
             rel="noreferrer"
             className="border border-ink/20 text-ink px-6 py-3 rounded-full text-sm flex items-center gap-2 hover:border-gold hover:text-gold transition-colors"

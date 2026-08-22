@@ -1,7 +1,9 @@
-import kovilImage from "../assets/nearby/kovil.png";
-
-const wiki = (filename) =>
-  `https://commons.wikimedia.org/wiki/Special:FilePath/${filename}?width=900`;
+import kovil from "../assets/nearby/kovil.png";
+import ashram from "../assets/nearby/ashram.png";
+import cave from "../assets/nearby/cave.png";
+import pancha from "../assets/nearby/pancha-BW3qqXir.png";
+import girivalam from "../assets/nearby/girivalam.png";
+import railway from "../assets/nearby/railway.png";
 
 // A safe, always-available fallback used if a specific landmark photo fails to load.
 export const attractionFallbackImage =
@@ -11,42 +13,42 @@ export const attractions = [
   {
     name: "Arunachaleswarar Temple",
     distance: "1.5 km from hotel",
-    image: kovilImage,
+    image: kovil,
     description:
       "One of South India's largest Shiva temples, its towering gopurams anchor the town and draw pilgrims from across the country through the year.",
   },
   {
     name: "Ramana Ashram",
     distance: "2 km from hotel",
-    image: wiki("Tiruvannamalai,_Sri_Ramana_Ashram,_Sri_Ramanasramam,_India.jpg"),
+    image: ashram,
     description:
       "The quiet hermitage of Sri Ramana Maharshi, still visited today by seekers looking for a still, reflective space away from the noise of travel.",
   },
   {
     name: "Virupaksha Cave",
     distance: "3.5 km from hotel",
-    image: wiki("Virupaksha_Cave,_Tiruvnnamalai.jpg"),
+    image: cave,
     description:
       "A hillside cave on Arunachala where Ramana Maharshi spent years in meditation, reached by a short, shaded climb worth the walk.",
   },
   {
     name: "Skandashram",
     distance: "3.8 km from hotel",
-    image: wiki("Skandashram,_Tiruvannamalai.jpg"),
+    image: pancha,
     description:
       "A hillside hermitage a little further up the slope of Arunachala, with quiet views back over the town and temple below.",
   },
   {
     name: "Girivalam Path",
     distance: "1 km from hotel",
-    image: wiki("Bhagavan_Bridge_-_Girivalam_Path_Tiruvannamalai.jpg"),
+    image: girivalam,
     description:
       "The sacred path circling the base of Arunachala hill, walked by pilgrims every day and especially crowded on Pournami nights.",
   },
   {
     name: "Tiruvannamalai Railway Station",
     distance: "2.5 km from hotel",
-    image: wiki("Thiruvannamalai_Railway_Station.jpg"),
+    image: railway,
     description:
       "The town's main railway station, a convenient link if you're arriving by train from Chennai or nearby cities.",
   },

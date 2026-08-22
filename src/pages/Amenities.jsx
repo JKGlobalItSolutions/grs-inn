@@ -9,9 +9,10 @@ import {
   Coffee,
   Droplets,
   Briefcase,
-  Truck,
+  ArrowUpDown,
   Zap,
   User,
+  ArrowLeft,
 } from "lucide-react";
 import SectionHeading from "../components/SectionHeading";
 import AmenityCard from "../components/AmenityCard";
@@ -25,7 +26,7 @@ const amenities = [
   { icon: Sparkles, label: "Daily Housekeeping" },
   { icon: ParkingCircle, label: "Parking" },
   { icon: Droplets, label: "24×7 Hot Water" },
-  { icon: Truck, label: "Lift" },
+  { icon: ArrowUpDown, label: "Lift" },
   { icon: Zap, label: "DG Generator Set" },
   { icon: User, label: "Driver Stay Facility" },
   { icon: Briefcase, label: "Business Facilities" },
@@ -35,6 +36,15 @@ export default function Amenities() {
   return (
     <div className="pt-32 pb-24">
       <div className="container-inn">
+        <div className="flex justify-center mb-6">
+          <a
+            href="/"
+            className="inline-flex items-center gap-2 text-sm text-ink-soft hover:text-gold transition-colors border border-sand rounded-full px-5 py-2"
+          >
+            <ArrowLeft size={16} />
+            Back to Home
+          </a>
+        </div>
         <SectionHeading
           eyebrow="Facilities"
           title="Everything You Need for a Comfortable Stay"
