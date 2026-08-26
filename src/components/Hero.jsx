@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useBooking } from "../context/BookingContext";
 import buildingExterior from "../assets/building-exterior.jpg";
 import room22 from "../assets/room22.jpeg";
 
 const slides = [buildingExterior, room22];
 const SLIDE_DURATION = 5500; // ms
 
+const BOOKING_URL = "https://www.bookingengine.sonachala.com/#/hotels/grs-inn";
+
 export default function Hero() {
-  const { openBooking } = useBooking();
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -78,12 +78,14 @@ export default function Hero() {
           transition={{ duration: 0.9, delay: 1 }}
           className="mt-10 flex flex-col sm:flex-row gap-4"
         >
-          <button
-            onClick={() => openBooking()}
-            className="bg-gold hover:bg-gold-light text-ivory px-8 py-3.5 rounded-full text-sm tracking-wide transition-all hover:-translate-y-0.5 hover:shadow-soft cursor-pointer"
+          <a
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-gold hover:bg-gold-light text-ivory px-8 py-3.5 rounded-full text-sm tracking-wide transition-all hover:-translate-y-0.5 hover:shadow-soft cursor-pointer"
           >
             Book Your Stay
-          </button>
+          </a>
           <Link
             to="/rooms"
             className="border border-ivory/70 text-ivory px-8 py-3.5 rounded-full text-sm tracking-wide transition-all hover:bg-ivory hover:text-ink hover:-translate-y-0.5"

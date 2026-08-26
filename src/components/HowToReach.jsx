@@ -5,7 +5,10 @@ import SectionHeading from "./SectionHeading";
 import { nearbyCities } from "../data/pilgrimage";
 import room1 from "../assets/room1.jpeg";
 
-const HOTEL_QUERY = "GRS INN, Tiruvannamalai, Tamil Nadu";
+// Exact destination coordinates are the source of truth for routing.
+// Using text like "GRS INN, Tiruvannamalai" lets Google Maps select a
+// similarly-named place, so we always navigate to the exact coordinates.
+const HOTEL_COORDS = "12.227718342183614,79.07516952817159";
 
 export default function HowToReach() {
   const [city, setCity] = useState("");
@@ -14,7 +17,7 @@ export default function HowToReach() {
   const openDirections = (origin) => {
     const url = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(
       origin
-    )}&destination=${encodeURIComponent(HOTEL_QUERY)}&travelmode=driving`;
+    )}&destination=${encodeURIComponent(HOTEL_COORDS)}&travelmode=driving`;
     window.open(url, "_blank", "noopener,noreferrer");
   };
 

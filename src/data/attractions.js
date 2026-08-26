@@ -1,7 +1,7 @@
 import kovil from "../assets/nearby/kovil.png";
-import ashram from "../assets/nearby/ashram.png";
+import ramana from "../assets/nearby/ramana.png";
 import cave from "../assets/nearby/cave.png";
-import pancha from "../assets/nearby/pancha-BW3qqXir.png";
+import ashram from "../assets/nearby/ashram.png";
 import girivalam from "../assets/nearby/girivalam.png";
 import railway from "../assets/nearby/railway.png";
 
@@ -20,7 +20,7 @@ export const attractions = [
   {
     name: "Ramana Ashram",
     distance: "2 km from hotel",
-    image: ashram,
+    image: ramana,
     description:
       "The quiet hermitage of Sri Ramana Maharshi, still visited today by seekers looking for a still, reflective space away from the noise of travel.",
   },
@@ -34,7 +34,7 @@ export const attractions = [
   {
     name: "Skandashram",
     distance: "3.8 km from hotel",
-    image: pancha,
+    image: ashram,
     description:
       "A hillside hermitage a little further up the slope of Arunachala, with quiet views back over the town and temple below.",
   },

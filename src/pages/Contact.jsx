@@ -79,7 +79,7 @@ export default function Contact() {
             <Mail size={15} /> Email Us
           </a>
           <a
-            href="https://maps.app.goo.gl/vjRxZEb2qMxqHtRs8"
+            href="https://www.google.com/maps/dir/?api=1&destination=12.227718342183614,79.07516952817159"
             target="_blank"
             rel="noreferrer"
             className="border border-ink/20 text-ink px-6 py-3 rounded-full text-sm flex items-center gap-2 hover:border-gold hover:text-gold transition-colors"

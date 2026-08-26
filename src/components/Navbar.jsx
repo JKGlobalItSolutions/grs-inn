@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useBooking } from "../context/BookingContext";
 import logo from "../assets/logo.png";
+
+const BOOKING_URL = "https://www.bookingengine.sonachala.com/#/hotels/grs-inn";
 
 const links = [
   { to: "/", label: "Home" },
@@ -17,7 +18,6 @@ const links = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const { openBooking } = useBooking();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -70,12 +70,14 @@ export default function Navbar() {
         </ul>
 
         <div className="hidden lg:block">
-          <button
-            onClick={() => openBooking()}
-            className="bg-gold hover:bg-gold-light text-ivory text-sm tracking-wide px-6 py-2.5 rounded-full transition-colors duration-300 cursor-pointer"
+          <a
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-gold hover:bg-gold-light text-ivory text-sm tracking-wide px-6 py-2.5 rounded-full transition-colors duration-300 cursor-pointer"
           >
             Book Now
-          </button>
+          </a>
         </div>
 
         <button
@@ -110,15 +112,15 @@ export default function Navbar() {
                 </li>
               ))}
               <li>
-                <button
-                  onClick={() => {
-                    setMenuOpen(false);
-                    openBooking();
-                  }}
-                  className="w-full bg-gold hover:bg-gold-light text-ivory text-sm tracking-wide px-6 py-3 rounded-full transition-colors cursor-pointer"
+                <a
+                  href={BOOKING_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => setMenuOpen(false)}
+                  className="block w-full text-center bg-gold hover:bg-gold-light text-ivory text-sm tracking-wide px-6 py-3 rounded-full transition-colors cursor-pointer"
                 >
                   Book Now
-                </button>
+                </a>
               </li>
             </ul>
           </motion.div>

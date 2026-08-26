@@ -30,7 +30,7 @@ export default function Footer() {
             <span className="font-display text-xl text-ivory tracking-wide">GRS Inn</span>
           </div>
           <p className="italic text-ivory/60 text-sm mb-6">
-            Comfort. Elegance. A Stay to Remember.
+            Experience a comfortable and memorable stay at GRS Inn, offering modern amenities, warm hospitality, and a convenient location in Tiruvannamalai.
           </p>
           <div className="flex items-center gap-3">
             <a href="#" aria-label="Instagram" className="w-9 h-9 grid place-items-center rounded-full border border-ivory/15 hover:border-gold-light hover:text-gold-light transition-colors">
@@ -60,9 +60,9 @@ export default function Footer() {
         <div>
           <h4 className="eyebrow text-gold-light mb-5">Rooms</h4>
           <ul className="space-y-3 text-sm">
-            <li><Link to="/rooms/standard-room" className="hover:text-gold-light transition-colors">Premium Room</Link></li>
-            <li><Link to="/rooms/deluxe-room" className="hover:text-gold-light transition-colors">Suite Room</Link></li>
-            <li><Link to="/rooms/suite-room" className="hover:text-gold-light transition-colors">Standard Room</Link></li>
+            <li><Link to="/rooms/standard-room" className="hover:text-gold-light transition-colors">Twin Super Deluxe Room</Link></li>
+            <li><Link to="/rooms/deluxe-room" className="hover:text-gold-light transition-colors">Twin Standard Room</Link></li>
+            <li><Link to="/rooms/suite-room" className="hover:text-gold-light transition-colors">Single Standard Room</Link></li>
           </ul>
         </div>
 

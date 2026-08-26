@@ -29,8 +29,9 @@ import NearbyAttractions from "../components/NearbyAttractions";
 import PilgrimageCalendar from "../components/PilgrimageCalendar";
 import HowToReach from "../components/HowToReach";
 import { rooms } from "../data/rooms";
-import { useBooking } from "../context/BookingContext";
 import buildingPhoto from "../assets/building-photo.jpeg";
+
+const BOOKING_URL = "https://www.bookingengine.sonachala.com/#/hotels/grs-inn";
 
 const amenities = [
   { icon: Wifi, label: "Free Wi-Fi" },
@@ -77,8 +78,6 @@ const whyChoose = [
 ];
 
 export default function Home() {
-  const { openBooking } = useBooking();
-
   return (
     <div>
       <Hero />
@@ -102,19 +101,19 @@ export default function Home() {
           </div>
         </motion.div>
 
-        <div>
+        <div className="max-w-xl">
           <SectionHeading
             align="left"
             eyebrow="About GRS Inn"
             title="A Stay Designed Around You"
             subtitle=""
           />
-          <p className="text-ink-soft leading-relaxed -mt-8 mb-8">
-GRS Inn
-A Stay Designed Around You
-GRS INN was built around a simple idea: a stay should feel effortless. Every room is kept clean and thoughtfully arranged, every facility is chosen for everyday convenience, and every member of our team is here to make your visit easier — whether you're passing through for a night of business or settling in for a longer family trip.With a focus on comfort, cleanliness, convenience, and warm hospitality, GRS Inn aims to make every guest’s stay pleasant and memorable. Whether you are visiting for pilgrimage, Girivalam, sightseeing, or business, GRS Inn is committed to providing a reliable and comfortable stay in Tiruvannamalai.
+          <p className="text-left text-ink-soft leading-relaxed -mt-8 mb-6">
+          GRS Inn
+          A Stay Designed Around You
+          GRS INN was built around a simple idea: a stay should feel effortless. Every room is kept clean and thoughtfully arranged, every facility is chosen for everyday convenience, and every member of our team is here to make your visit easier — whether you're passing through for a night of business or settling in for a longer family trip.With a focus on comfort, cleanliness, convenience, and warm hospitality, GRS Inn aims to make every guest’s stay pleasant and memorable. Whether you are visiting for pilgrimage, Girivalam, sightseeing, or business, GRS Inn is committed to providing a reliable and comfortable stay in Tiruvannamalai.
           </p>
-          <ul className="grid grid-cols-2 gap-4 mb-10">
+          <ul className="grid grid-cols-2 gap-x-6 gap-y-4 mb-10">
             {["Comfortable accommodation", "Thoughtfully designed rooms", "Modern facilities", "Friendly hospitality", "Convenient location", "Business & leisure ready"].map(
               (item) => (
                 <li key={item} className="flex items-start gap-2 text-sm text-ink-soft">
@@ -234,12 +233,14 @@ GRS INN was built around a simple idea: a stay should feel effortless. Every roo
           <p className="text-ivory/70 max-w-lg mx-auto mb-9">
             Reserve your room at GRS INN today and let us take care of the rest.
           </p>
-          <button
-            onClick={() => openBooking()}
-            className="bg-gold hover:bg-gold-light text-ivory px-9 py-3.5 rounded-full text-sm tracking-wide transition-all hover:-translate-y-0.5 cursor-pointer"
+          <a
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-gold hover:bg-gold-light text-ivory px-9 py-3.5 rounded-full text-sm tracking-wide transition-all hover:-translate-y-0.5 cursor-pointer"
           >
             Book Your Stay
-          </button>
+          </a>
         </div>
       </section>
     </div>

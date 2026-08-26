@@ -3,12 +3,12 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Ruler, BedDouble, Users, Eye, CheckCircle2, Clock } from "lucide-react";
 import { getRoomBySlug, rooms } from "../data/rooms";
-import { useBooking } from "../context/BookingContext";
+
+const BOOKING_URL = "https://www.bookingengine.sonachala.com/#/hotels/grs-inn";
 
 export default function RoomDetails() {
   const { slug } = useParams();
   const room = getRoomBySlug(slug);
-  const { openBooking } = useBooking();
   const [activeImage, setActiveImage] = useState(0);
 
   useEffect(() => {
@@ -107,12 +107,14 @@ export default function RoomDetails() {
                 <span className="w-2 h-2 rounded-full bg-green-600" /> Available for booking
               </div>
 
-              <button
-                onClick={() => openBooking(room.name)}
-                className="w-full bg-gold hover:bg-gold-light text-ivory text-sm tracking-wide px-6 py-3.5 rounded-full transition-colors cursor-pointer"
+              <a
+                href={BOOKING_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block w-full text-center bg-gold hover:bg-gold-light text-ivory text-sm tracking-wide px-6 py-3.5 rounded-full transition-colors cursor-pointer"
               >
                 Book Now
-              </button>
+              </a>
             </div>
           </aside>
         </div>

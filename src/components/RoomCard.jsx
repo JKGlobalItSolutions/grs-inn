@@ -1,11 +1,10 @@
 import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useBooking } from "../context/BookingContext";
+
+const BOOKING_URL = "https://www.bookingengine.sonachala.com/#/hotels/grs-inn";
 
 export default function RoomCard({ room, index = 0 }) {
-  const { openBooking } = useBooking();
-
   const images = useMemo(
     () => (room.gallery && room.gallery.length > 0 ? room.gallery.slice(0, 2) : [room.heroImage]),
     [room.gallery, room.heroImage]
@@ -85,12 +84,14 @@ export default function RoomCard({ room, index = 0 }) {
           >
             View Details
           </Link>
-          <button
-            onClick={() => openBooking(room.name)}
+          <a
+            href={BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex-1 text-center bg-gold hover:bg-gold-light text-ivory text-sm px-4 py-2.5 rounded-full transition-colors cursor-pointer"
           >
             Book Now
-          </button>
+          </a>
         </div>
       </div>
     </motion.article>

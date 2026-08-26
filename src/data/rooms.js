@@ -14,8 +14,8 @@ import room11 from "../assets/room11.jpeg";
 
 export const rooms = [
   {
-    slug: "Premium Room",
-    name: "Premium Room",
+    slug: "Twin Super Deluxe Room",
+    name: "Twin Super Deluxe Room",
     tagline: "Comfortable. Practical. Restful.",
     price: "₹3500",
     priceNote: "per night, taxes extra",
@@ -48,8 +48,8 @@ export const rooms = [
     ],
   },
   {
-    slug: "Suite Room",
-    name: "Suite Room",
+    slug: "Twin Standard Room",
+    name: "Twin Standard Room",
     tagline: "Spacious. Refined. Unwind.",
     price: "₹3000",
     priceNote: "per night, taxes extra",
@@ -84,8 +84,8 @@ export const rooms = [
     ],
   },
   {
-    slug: "Standard Room",
-    name: "Standard Room ",
+    slug: "Single Standard Room",
+    name: "Single Standard Room ",
     tagline: "Elegant. Expansive. Elevated.",
     price: "₹2000",
     priceNote: "per night, taxes extra",

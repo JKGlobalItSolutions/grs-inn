@@ -3,7 +3,8 @@ import { motion } from "framer-motion";
 import { Hourglass, Moon, Sparkles } from "lucide-react";
 import { pilgrimageDates, getNextPournami, stayBenefits } from "../data/pilgrimage";
 import SectionHeading from "./SectionHeading";
-import { useBooking } from "../context/BookingContext";
+
+const BOOKING_URL = "https://www.bookingengine.sonachala.com/#/hotels/grs-inn";
 
 function useCountdown(targetDate) {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -26,8 +27,6 @@ function useCountdown(targetDate) {
 }
 
 export default function PilgrimageCalendar() {
-  const { openBooking } = useBooking();
-
   // Compute `next` exactly once (lazy initializer) instead of calling
   // getNextPournami() on every render. If that function returns a fresh
   // object/Date each time it's called, calling it on every render made
@@ -92,12 +91,14 @@ export default function PilgrimageCalendar() {
                 <div className="flex items-center gap-2 text-ivory/70 text-xs eyebrow">
                   <Hourglass size={14} className="text-gold-light" /> Booking Countdown
                 </div>
-                <button
-                  onClick={() => openBooking()}
-                  className="bg-gold hover:bg-gold-light text-ivory text-xs px-5 py-2.5 rounded-full transition-colors cursor-pointer"
+                <a
+                  href={BOOKING_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-gold hover:bg-gold-light text-ivory text-xs px-5 py-2.5 rounded-full transition-colors cursor-pointer"
                 >
                   Reserve Your Stay
-                </button>
+                </a>
               </div>
               <p className="flex items-center gap-2 text-ivory/80 text-sm mb-5">
                 <Moon size={16} className="text-gold-light" /> Next Pournami — {next.label}
@@ -136,12 +137,14 @@ export default function PilgrimageCalendar() {
                   <div className="h-full bg-gold rounded-full" style={{ width: "85%" }} />
                 </div>
                 <p className="text-red-600 text-xs font-medium mb-4">Only 3 Rooms Remaining</p>
-                <button
-                  onClick={() => openBooking()}
-                  className="w-full bg-ink hover:bg-pine text-ivory text-xs tracking-wide px-4 py-2.5 rounded-full transition-colors cursor-pointer"
+                <a
+                  href={BOOKING_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full text-center bg-ink hover:bg-pine text-ivory text-xs tracking-wide px-4 py-2.5 rounded-full transition-colors cursor-pointer"
                 >
                   Book Now
-                </button>
+                </a>
               </motion.div>
 
               <motion.div
