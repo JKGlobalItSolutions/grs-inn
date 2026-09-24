@@ -6,9 +6,10 @@ export function BookingProvider({ children }) {
   const [isOpen, setIsOpen] = useState(false);
   const [presetRoom, setPresetRoom] = useState("");
 
-  const openBooking = useCallback((roomType = "") => {
-    setPresetRoom(roomType);
-    setIsOpen(true);
+const BOOKING_URL = "https://bookingengine.stayflexi.com/41762/?checkin=02-10-2026&num_nights=1&num_guests=2&source=google&hotel_id=41762";
+
+  const openBooking = useCallback(() => {
+    window.open(BOOKING_URL, "_blank");
   }, []);
 
   const closeBooking = useCallback(() => setIsOpen(false), []);

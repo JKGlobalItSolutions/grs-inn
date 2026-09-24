@@ -4,7 +4,7 @@ import { Hourglass, Moon, Sparkles } from "lucide-react";
 import { pilgrimageDates, getNextPournami, stayBenefits } from "../data/pilgrimage";
 import SectionHeading from "./SectionHeading";
 
-const BOOKING_URL = "https://www.bookingengine.sonachala.com/#/hotels/grs-inn";
+const BOOKING_URL = "https://bookingengine.stayflexi.com/41762/?checkin=02-10-2026&num_nights=1&num_guests=2&source=google&hotel_id=41762";
 
 function useCountdown(targetDate) {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });

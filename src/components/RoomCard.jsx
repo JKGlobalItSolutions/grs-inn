@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 
-const BOOKING_URL = "https://www.bookingengine.sonachala.com/#/hotels/grs-inn";
+const BOOKING_URL = "https://bookingengine.stayflexi.com/41762/?checkin=02-10-2026&num_nights=1&num_guests=2&source=google&hotel_id=41762";
 
 export default function RoomCard({ room, index = 0 }) {
   const images = useMemo(

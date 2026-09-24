@@ -31,7 +31,7 @@ import HowToReach from "../components/HowToReach";
 import { rooms } from "../data/rooms";
 import buildingPhoto from "../assets/building-photo.jpeg";
 
-const BOOKING_URL = "https://www.bookingengine.sonachala.com/#/hotels/grs-inn";
+const BOOKING_URL = "https://bookingengine.stayflexi.com/41762/?checkin=02-10-2026&num_nights=1&num_guests=2&source=google&hotel_id=41762";
 
 const amenities = [
   { icon: Wifi, label: "Free Wi-Fi" },

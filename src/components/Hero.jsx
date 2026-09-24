@@ -7,7 +7,7 @@ import room22 from "../assets/room22.jpeg";
 const slides = [buildingExterior, room22];
 const SLIDE_DURATION = 5500; // ms
 
-const BOOKING_URL = "https://www.bookingengine.sonachala.com/#/hotels/grs-inn";
+const BOOKING_URL = "https://bookingengine.stayflexi.com/41762/?checkin=02-10-2026&num_nights=1&num_guests=2&source=google&hotel_id=41762";
 
 export default function Hero() {
   const [current, setCurrent] = useState(0);

@@ -34,9 +34,11 @@ export default function BookingBar() {
 
   const update = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
 
+const BOOKING_URL = "https://bookingengine.stayflexi.com/41762/?checkin=02-10-2026&num_nights=1&num_guests=2&source=google&hotel_id=41762";
+
   const handleCheck = (e) => {
     e.preventDefault();
-    openBooking(form.roomType);
+    window.open(BOOKING_URL, "_blank");
   };
 
   const fieldClass =
