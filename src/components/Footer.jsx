@@ -68,7 +68,7 @@ const socialLinks = [
 export default function Footer() {
   return (
     <footer className="bg-[#211C17] text-ivory/80 pt-20 pb-8">
-      <div className="container-inn grid grid-cols-1 md:grid-cols-[1.3fr_1fr_1fr_1fr] gap-12 pb-14 border-b border-ivory/10">
+      <div className="container-inn grid grid-cols-1 md:grid-cols-[1.3fr_1fr_1fr_1fr] gap-12 pb-10 border-b border-ivory/10">
         <div>
           <div className="flex items-center gap-2 mb-4">
             <img src={logo} alt="GRS Inn logo" className="w-11 h-11 rounded-full object-cover" />
@@ -77,21 +77,6 @@ export default function Footer() {
           <p className="italic text-ivory/60 text-sm mb-6">
             Experience a comfortable and memorable stay at GRS Inn, offering modern amenities, warm hospitality, and a convenient location in Tiruvannamalai.
           </p>
-          <div className="flex items-center gap-3">
-            {socialLinks.map(({ name, href, Icon }) => (
-              <a
-                key={name}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={name}
-                title={name}
-                className="hover:scale-115 transition-transform duration-200"
-              >
-                <Icon className="w-9 h-9 drop-shadow-sm hover:drop-shadow-md transition-all" />
-              </a>
-            ))}
-          </div>
         </div>
 
         <div>
@@ -102,6 +87,7 @@ export default function Footer() {
             <li><Link to="/rooms" className="hover:text-gold-light transition-colors">Rooms</Link></li>
             <li><Link to="/amenities" className="hover:text-gold-light transition-colors">Amenities</Link></li>
             <li><Link to="/gallery" className="hover:text-gold-light transition-colors">Gallery</Link></li>
+            <li><Link to="/pournami-calendar" className="hover:text-gold-light transition-colors">Pournami Calendar</Link></li>
             <li><Link to="/contact" className="hover:text-gold-light transition-colors">Contact</Link></li>
           </ul>
         </div>
@@ -125,7 +111,27 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="container-inn pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-ivory/45">
+      {/* Centered Social Media Icons */}
+      <div className="container-inn py-8 flex flex-col items-center justify-center gap-3 border-b border-ivory/10">
+        <span className="text-xs eyebrow text-gold-light/80 tracking-widest uppercase">Connect With Us</span>
+        <div className="flex items-center justify-center gap-5">
+          {socialLinks.map(({ name, href, Icon }) => (
+            <a
+              key={name}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={name}
+              title={name}
+              className="hover:scale-115 transition-transform duration-200 cursor-pointer"
+            >
+              <Icon className="w-9 h-9 drop-shadow-sm hover:drop-shadow-md transition-all" />
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div className="container-inn pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-ivory/45">
         <p>© 2026 GRS Inn. All rights reserved.</p>
         <p>Designed by Sonachala</p>
       </div>

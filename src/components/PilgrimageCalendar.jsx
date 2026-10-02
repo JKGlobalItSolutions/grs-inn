@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Hourglass, Moon, Sparkles } from "lucide-react";
+import { Hourglass, Moon, Sparkles, FileText } from "lucide-react";
 import { pilgrimageDates, getNextPournami, stayBenefits } from "../data/pilgrimage";
 import SectionHeading from "./SectionHeading";
 
@@ -76,6 +77,15 @@ export default function PilgrimageCalendar() {
                 </li>
               ))}
             </ul>
+            <div className="mt-6 pt-4 border-t border-sand">
+              <Link
+                to="/pournami-calendar"
+                className="flex items-center justify-center gap-2 w-full bg-sand/30 hover:bg-gold hover:text-ivory text-ink text-xs font-medium py-3 px-4 rounded-xl transition-all duration-300"
+              >
+                <FileText size={16} />
+                <span>View & Download Full Pournami Calendar PDF</span>
+              </Link>
+            </div>
           </motion.div>
 
           {/* Countdown + room status + benefits */}

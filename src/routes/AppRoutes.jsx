@@ -5,6 +5,7 @@ import Rooms from "../pages/Rooms";
 import RoomDetails from "../pages/RoomDetails";
 import Amenities from "../pages/Amenities";
 import GalleryPage from "../pages/GalleryPage";
+import PournamiCalendarPage from "../pages/PournamiCalendarPage";
 import Contact from "../pages/Contact";
 
 export default function AppRoutes() {
@@ -16,6 +17,7 @@ export default function AppRoutes() {
       <Route path="/rooms/:slug" element={<RoomDetails />} />
       <Route path="/amenities" element={<Amenities />} />
       <Route path="/gallery" element={<GalleryPage />} />
+      <Route path="/pournami-calendar" element={<PournamiCalendarPage />} />
       <Route path="/contact" element={<Contact />} />
     </Routes>
   );

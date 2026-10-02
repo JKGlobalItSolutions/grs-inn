@@ -1,6 +1,6 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "../assets/logo.png";
 
@@ -73,14 +73,13 @@ const links = [
   { to: "/rooms", label: "Rooms" },
   { to: "/amenities", label: "Amenities" },
   { to: "/gallery", label: "Gallery" },
+  { to: "/pournami-calendar", label: "Pournami Calendar" },
   { to: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [viewUsOpen, setViewUsOpen] = useState(false);
-  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -92,16 +91,6 @@ export default function Navbar() {
   useEffect(() => {
     document.body.style.overflow = menuOpen ? "hidden" : "";
   }, [menuOpen]);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setViewUsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   return (
     <header
@@ -125,62 +114,49 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <ul className="hidden lg:flex items-center gap-9">
-          {links.map((l) => (
-            <li key={l.to}>
-              <NavLink
-                to={l.to}
-                className={({ isActive }) =>
-                  `text-sm tracking-wide transition-colors relative pb-1 ${
-                    scrolled ? "text-ink-soft" : "text-ivory/90"
-                  } hover:text-gold ${isActive ? "text-gold" : ""}`
-                }
-              >
-                {l.label}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
+        {/* Desktop Nav Links & Follow Us */}
+        <div className="hidden lg:flex items-center gap-7">
+          <ul className="flex items-center gap-7">
+            {links.map((l) => (
+              <li key={l.to}>
+                <NavLink
+                  to={l.to}
+                  className={({ isActive }) =>
+                    `text-sm tracking-wide transition-colors relative pb-1 ${
+                      scrolled ? "text-ink-soft" : "text-ivory/90"
+                    } hover:text-gold ${isActive ? "text-gold" : ""}`
+                  }
+                >
+                  {l.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
 
-        {/* View Us Button with Dropdown (Desktop) */}
-        <div className="hidden lg:block relative" ref={dropdownRef}>
-          <button
-            onClick={() => setViewUsOpen((v) => !v)}
-            className="inline-flex items-center gap-2 bg-gold hover:bg-gold-light text-ivory text-sm tracking-wide px-6 py-2.5 rounded-full transition-colors duration-300 cursor-pointer shadow-md"
-            aria-expanded={viewUsOpen}
-          >
-            <span>View Us</span>
-            <ChevronDown
-              size={16}
-              className={`transition-transform duration-300 ${viewUsOpen ? "rotate-180" : ""}`}
-            />
-          </button>
-
-          <AnimatePresence>
-            {viewUsOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: 8, scale: 0.95 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 8, scale: 0.95 }}
-                transition={{ duration: 0.15, ease: "easeOut" }}
-                className="absolute right-0 mt-2 p-2 bg-ivory/95 backdrop-blur-md rounded-2xl shadow-xl border border-sand/80 z-50 flex flex-col items-center gap-3"
-              >
-                {socialLinks.map(({ name, href, Icon }) => (
-                  <a
-                    key={name}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title={name}
-                    onClick={() => setViewUsOpen(false)}
-                    className="group relative flex items-center justify-center p-1 hover:scale-115 transition-transform duration-200 cursor-pointer"
-                  >
-                    <Icon className="w-10 h-10 drop-shadow-sm group-hover:drop-shadow-md transition-all" />
-                  </a>
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
+          {/* Follow Us Inline */}
+          <div className="flex items-center gap-3 pl-4 border-l border-sand/40">
+            <span
+              className={`text-sm tracking-wide font-medium transition-colors ${
+                scrolled ? "text-ink-soft" : "text-ivory/90"
+              }`}
+            >
+              Follow Us:
+            </span>
+            <div className="flex items-center gap-2">
+              {socialLinks.map(({ name, href, Icon }) => (
+                <a
+                  key={name}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={name}
+                  className="hover:scale-115 transition-transform duration-200 cursor-pointer"
+                >
+                  <Icon className="w-7 h-7 drop-shadow-sm" />
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
 
         <button
@@ -193,6 +169,7 @@ export default function Navbar() {
         </button>
       </nav>
 
+      {/* Mobile Menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -214,48 +191,24 @@ export default function Navbar() {
                   </NavLink>
                 </li>
               ))}
-              <li className="pt-2 border-t border-sand/60">
-                <button
-                  onClick={() => setViewUsOpen((v) => !v)}
-                  className="w-full flex items-center justify-between bg-gold hover:bg-gold-light text-ivory text-sm tracking-wide px-6 py-3 rounded-full transition-colors cursor-pointer"
-                >
-                  <span>View Us</span>
-                  <ChevronDown
-                    size={18}
-                    className={`transition-transform duration-300 ${viewUsOpen ? "rotate-180" : ""}`}
-                  />
-                </button>
 
-                <AnimatePresence>
-                  {viewUsOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.2 }}
-                      className="overflow-hidden bg-white/80 rounded-2xl mt-3 p-3 border border-sand/60"
+              <li className="pt-4 border-t border-sand/60 flex items-center justify-between gap-3">
+                <span className="text-sm font-medium text-ink-soft">Follow Us:</span>
+                <div className="flex items-center gap-3">
+                  {socialLinks.map(({ name, href, Icon }) => (
+                    <a
+                      key={name}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={name}
+                      onClick={() => setMenuOpen(false)}
+                      className="hover:scale-110 transition-transform cursor-pointer"
                     >
-                      <div className="flex items-center justify-around py-1">
-                        {socialLinks.map(({ name, href, Icon }) => (
-                          <a
-                            key={name}
-                            href={href}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            title={name}
-                            onClick={() => {
-                              setViewUsOpen(false);
-                              setMenuOpen(false);
-                            }}
-                            className="flex flex-col items-center hover:scale-110 transition-transform"
-                          >
-                            <Icon className="w-10 h-10" />
-                          </a>
-                        ))}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                      <Icon className="w-8 h-8" />
+                    </a>
+                  ))}
+                </div>
               </li>
             </ul>
           </motion.div>
