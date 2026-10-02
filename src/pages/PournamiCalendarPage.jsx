@@ -1,14 +1,59 @@
-import { motion } from "framer-motion";
-import { Download, ExternalLink, Calendar, FileText, ArrowLeft, ShieldCheck } from "lucide-react";
-import { Link } from "react-router-dom";
-import SectionHeading from "../components/SectionHeading";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Download, Printer, Calendar, FileText, ZoomIn, X } from "lucide-react";
 import PilgrimageCalendar from "../components/PilgrimageCalendar";
 import pournamiPdf from "../assets/pournamical/GRSINNTVM_GIRIVALAM_CALENDAR_2027_FINAL.pdf";
+import pournamiImage from "../assets/pournamical/pournami_calendar_page_1.png";
 
 const BOOKING_URL = "https://bookingengine.stayflexi.com/41762/?checkin=02-10-2026&num_nights=1&num_guests=2&source=google&hotel_id=41762";
 
 export default function PournamiCalendarPage() {
   const pdfUrl = pournamiPdf || "/GRSINNTVM_GIRIVALAM_CALENDAR_2027_FINAL.pdf";
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+
+  const handlePrint = () => {
+    const printWindow = window.open("", "_blank");
+    if (!printWindow) return;
+    printWindow.document.write(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>GRS INN Tiruvannamalai - Pournami & Girivalam Calendar 2026</title>
+          <style>
+            body {
+              margin: 0;
+              padding: 20px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              background-color: #ffffff;
+            }
+            img {
+              max-width: 100%;
+              height: auto;
+              display: block;
+              margin: 0 auto;
+            }
+            @media print {
+              body {
+                padding: 0;
+              }
+              img {
+                max-width: 100%;
+                width: 100%;
+                height: auto;
+                page-break-inside: avoid;
+              }
+            }
+          </style>
+        </head>
+        <body>
+          <img src="${pournamiImage}" alt="GRS INN Tiruvannamalai Pournami Calendar 2027" onload="setTimeout(function(){ window.print(); }, 300);" />
+        </body>
+      </html>
+    `);
+    printWindow.document.close();
+  };
 
   return (
     <div className="pt-28 pb-20 bg-ivory">
@@ -40,20 +85,18 @@ export default function PournamiCalendarPage() {
               <Download size={18} />
               <span>Download PDF</span>
             </a>
-            <a
-              href={pdfUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={handlePrint}
               className="flex items-center justify-center gap-2 bg-ivory/15 hover:bg-ivory/25 text-ivory border border-ivory/20 text-sm font-medium px-5 py-3 rounded-full transition-all duration-300 cursor-pointer"
             >
-              <ExternalLink size={18} />
-              <span>Full Screen</span>
-            </a>
+              <Printer size={18} />
+              <span>Print Calendar</span>
+            </button>
           </div>
         </div>
       </div>
 
-      {/* Embedded PDF Viewer Section */}
+      {/* High-Resolution Calendar Image Section */}
       <div className="container-inn mb-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -61,7 +104,8 @@ export default function PournamiCalendarPage() {
           transition={{ duration: 0.6 }}
           className="bg-white border border-sand rounded-3xl p-4 sm:p-6 shadow-md"
         >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-4 border-b border-sand">
+          {/* Header Controls */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-sand">
             <div className="flex items-center gap-3">
               <div className="p-2.5 bg-sand/40 rounded-xl text-gold">
                 <FileText size={22} />
@@ -71,55 +115,121 @@ export default function PournamiCalendarPage() {
                   GRS INN Tiruvannamalai Girivalam Calendar 2027
                 </h2>
                 <p className="text-xs text-ink-soft">
-                  Official PDF Document • Scroll or download for offline access
+                  High Resolution Official Image • Click image to zoom / download PDF or print below
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                onClick={() => setIsLightboxOpen(true)}
+                className="flex items-center gap-1.5 bg-sand/30 hover:bg-sand/60 text-ink text-xs font-medium px-4 py-2.5 rounded-full transition-colors cursor-pointer"
+              >
+                <ZoomIn size={15} />
+                <span>Fullscreen Zoom</span>
+              </button>
+
+              <button
+                onClick={handlePrint}
+                className="flex items-center gap-1.5 bg-sand/30 hover:bg-gold hover:text-ivory text-ink text-xs font-medium px-4 py-2.5 rounded-full transition-colors cursor-pointer"
+              >
+                <Printer size={15} />
+                <span>Print</span>
+              </button>
+
+              <a
+                href={pdfUrl}
+                download="GRSINN_Pournami_Girivalam_Calendar_2027.pdf"
+                className="flex items-center gap-1.5 bg-gold hover:bg-gold-light text-ivory text-xs font-medium px-4 py-2.5 rounded-full transition-colors cursor-pointer"
+              >
+                <Download size={15} />
+                <span>Download PDF</span>
+              </a>
+
               <a
                 href={BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-ink hover:bg-pine text-ivory text-xs font-medium px-5 py-2.5 rounded-full transition-colors cursor-pointer"
               >
-                Book Stay For Pournami
+                Book Stay
               </a>
             </div>
           </div>
 
-          {/* PDF Viewer Frame */}
-          <div className="relative w-full h-[75vh] min-h-[500px] max-h-[900px] rounded-2xl overflow-hidden bg-sand/20 border border-sand/60">
-            <object
-              data={pdfUrl}
-              type="application/pdf"
-              className="w-full h-full"
-            >
-              <iframe
-                src={pdfUrl}
-                title="Pournami & Girivalam Calendar PDF"
-                className="w-full h-full border-0"
-              >
-                <div className="flex flex-col items-center justify-center h-full p-8 text-center bg-ivory-dim">
-                  <FileText size={48} className="text-gold mb-4" />
-                  <p className="text-ink font-display text-lg mb-2">Unable to display PDF preview directly on this device.</p>
-                  <p className="text-ink-soft text-sm mb-6 max-w-md">You can download the PDF file directly to view the Pournami & Girivalam Calendar.</p>
-                  <a
-                    href={pdfUrl}
-                    download="GRSINN_Pournami_Girivalam_Calendar_2027.pdf"
-                    className="inline-flex items-center gap-2 bg-gold text-ivory text-sm px-6 py-3 rounded-full"
-                  >
-                    <Download size={18} /> Download Calendar PDF
-                  </a>
-                </div>
-              </iframe>
-            </object>
+          {/* Calendar Image View */}
+          <div className="w-full rounded-2xl overflow-hidden bg-sand/10 border border-sand/60 shadow-inner flex justify-center items-center p-2 sm:p-4">
+            <img
+              src={pournamiImage}
+              alt="GRS INN Tiruvannamalai Pournami & Girivalam Calendar 2027"
+              className="w-full h-auto max-h-[85vh] object-contain rounded-xl cursor-pointer"
+              onClick={() => setIsLightboxOpen(true)}
+            />
           </div>
         </motion.div>
       </div>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {isLightboxOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-ink/90 backdrop-blur-md flex flex-col p-4 sm:p-8"
+            onClick={() => setIsLightboxOpen(false)}
+          >
+            {/* Lightbox Bar */}
+            <div
+              className="flex items-center justify-between text-ivory mb-4 max-w-7xl mx-auto w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center gap-2">
+                <FileText className="text-gold" size={20} />
+                <span className="font-display text-sm sm:text-base">GRS INN Pournami & Girivalam Calendar 2027</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <a
+                  href={pdfUrl}
+                  download="GRSINN_Pournami_Girivalam_Calendar_2027.pdf"
+                  className="flex items-center gap-1.5 bg-gold hover:bg-gold-light text-ivory text-xs px-4 py-2 rounded-full transition-colors"
+                >
+                  <Download size={14} /> Download PDF
+                </a>
+                <button
+                  onClick={handlePrint}
+                  className="flex items-center gap-1.5 bg-ivory/20 hover:bg-ivory/30 text-ivory text-xs px-4 py-2 rounded-full transition-colors cursor-pointer"
+                >
+                  <Printer size={14} /> Print
+                </button>
+                <button
+                  onClick={() => setIsLightboxOpen(false)}
+                  className="p-2 bg-ivory/10 hover:bg-ivory/25 rounded-full text-ivory transition-colors cursor-pointer"
+                  aria-label="Close Preview"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+            </div>
+
+            {/* Lightbox Image Container */}
+            <div
+              className="flex-1 flex items-center justify-center overflow-auto max-w-7xl mx-auto w-full"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={pournamiImage}
+                alt="GRS INN Tiruvannamalai Pournami Calendar 2027 Full resolution"
+                className="max-w-full max-h-[85vh] object-contain rounded-xl shadow-2xl"
+              />
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Interactive Dates & Countdown Section */}
       <PilgrimageCalendar />
     </div>
   );
 }
+
